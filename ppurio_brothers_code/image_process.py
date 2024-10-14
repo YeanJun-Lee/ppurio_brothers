@@ -2,15 +2,18 @@ import openai
 import cv2
 import easyocr
 import numpy as np
+import os
 import matplotlib.pyplot as plt
 import requests
 from PIL import Image
 from io import BytesIO
 
+# 환경 변수에서 API KEY 가져오기
+openai_api_key = os.getenv('OPENAI_API_KEY')
+stability_api_key = os.getenv('STABLE_API_KEY')
+
 # Open API Key 등록
-client = openai.OpenAI(api_key = "School Key")
-# Stability API Key 등록
-stability_api_key = "My API Key"
+client = openai.OpenAI(api_key = openai_api_key)
 
 # prompt 기반 이미지 생성 함수
 # prompt 와 save_path를 매개변수로 받아 이미지를 생성한다. 
@@ -111,10 +114,10 @@ def erase(image_path, mask_path, output_path, stability_api_key):
 # 전체 흐름 실행
 def main():
     
-    prompt_file_path = "ppurio_brothers_backup/prompt/prompt.txt"
-    image_path = "ppurio_brothers_backup/images/origin_image/image.png"
-    mask_path = "ppurio_brothers_backup/images/mask/mask.png"
-    output_path = "ppurio_brothers_backup/images/output/output.png"
+    prompt_file_path = "/home/ec2-user/prompt/prompt.txt"
+    image_path = "/home/ec2-user/images/origin_image/image.png"
+    mask_path = "/home/ec2-user/images/mask/mask.png"
+    output_path = "/home/ec2-user/images/output/output.png"
 
     generate_image(prompt_file_path, image_path)
     create_mask(image_path, mask_path)
