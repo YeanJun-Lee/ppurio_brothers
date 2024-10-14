@@ -14,7 +14,11 @@ stability_api_key = "My API Key"
 
 # prompt 기반 이미지 생성 함수
 # prompt 와 save_path를 매개변수로 받아 이미지를 생성한다. 
-def generate_image(prompt, save_path):
+def generate_image(prompt_file_path, save_path):
+
+    # prompt.txt 파일에서 prompt 읽기
+    with open(prompt_file_path, 'r', encoding='utf-8') as file:
+        prompt = file.read().strip() # 파일의 내용을 prompt로 사용
 
     # 이미지 생성 모듈
     response = client.images.generate(
@@ -106,14 +110,13 @@ def erase(image_path, mask_path, output_path, stability_api_key):
 
 # 전체 흐름 실행
 def main():
-    user_input = input("Type a prompt of text:")
-    PROMPT = user_input
-
+    
+    prompt_file_path = "ppurio_brothers_backup/prompt/prompt.txt"
     image_path = "ppurio_brothers_backup/images/origin_image/image.png"
     mask_path = "ppurio_brothers_backup/images/mask/mask.png"
     output_path = "ppurio_brothers_backup/images/output/output.png"
 
-    generate_image(PROMPT, image_path)
+    generate_image(prompt_file_path, image_path)
     create_mask(image_path, mask_path)
     erase(image_path, mask_path, output_path, stability_api_key)
 

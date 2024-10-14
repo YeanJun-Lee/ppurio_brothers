@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="384563d1-1697-4e44-bd9b-87b25ac53247" name="변경" comment="">
-      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ppurio_react" beforeDir="false" afterPath="$PROJECT_DIR$/../ppurio_react" afterDir="false" />
-    </list>
+    <list default="true" id="384563d1-1697-4e44-bd9b-87b25ac53247" name="변경" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -38,7 +35,7 @@
     "RequestMappingsPanelWidth1": "75",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "Spring Boot.PpurioApplication.executor": "Run",
-    "git-widget-placeholder": "release에서 되돌리는 중",
+    "git-widget-placeholder": "release",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "/Users/mine/학교/2024-2학기/SW프리캡스톤디자인/ppurio_brothers_git/pprio_brothers/brothers",
     "node.js.detected.package.eslint": "true",
@@ -77,6 +74,7 @@
       <updated>1728833585026</updated>
       <workItem from="1728833586117" duration="111000" />
       <workItem from="1728833868981" duration="1131000" />
+      <workItem from="1728880295752" duration="16000" />
     </task>
     <servers />
   </component>
