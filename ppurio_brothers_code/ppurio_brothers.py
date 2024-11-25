@@ -19,23 +19,23 @@ client = openai.OpenAI(api_key = openai_api_key)
 STYLE_MAP = {
     "style1": {
         "art_style": "a modern and professional style with clean, sleek design elements",
-        "font": "/home/ec2-user/font/NotoSansKR-VariableFont_wght.ttf"
+        "font": "/home/ec2-user/font/NotoSansKR-Black.ttf"
     },
     "style2": {
         "art_style": "a classic and elegant style featuring serif fonts and soft colors",
-        "font": "/home/ec2-user/font/NanumMyeongjo-Regular.ttf"
+        "font": "/home/ec2-user/font/NanumMyeongjo-ExtraBold.ttf"
     },
     "style3": {
         "art_style": "an eco-friendly style with earthy tones and natural elements",
-        "font": "/home/ec2-user/font/Spoqa Han Sans Regular.ttf"        
-    },
+        "font": "/home/ec2-user/font/Spoqa Han Sans Bold.ttf"        
+    }, 
     "style4": {
         "art_style": "a warm and friendly local event style with cozy, inviting visuals",
         "font": "/home/ec2-user/font/BMHANNA_11yrs_ttf.ttf"
     },
     "style5": {
         "art_style": "a practical, information-focused style with clear, concise visuals",
-        "font": "/home/ec2-user/font/NanumGothic-Regular.ttf"
+        "font": "/home/ec2-user/font/NanumGothic-ExtraBold.ttf"
     },
     "style6": {
         "art_style": "a viral social media style with bold, eye-catching visuals",
