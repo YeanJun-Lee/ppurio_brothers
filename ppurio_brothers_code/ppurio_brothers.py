@@ -307,14 +307,27 @@ def main():
     with open("/home/ec2-user/prompt/prompt.json", "r", encoding="utf-8") as file :
         prompt_data = json.load(file)
     
+    # 사용자 입력 받기
+    # user_input = input("고객님의 이벤트 정보를 입력해 주세요: ")
+    # brand_input = input("브랜드명이 있으면 입력해 주세요 (없으면 엔터): ")
+    # selected_style = input("선택한 스타일 ID를 입력하세요 (예: style1, style2, ...): ")
+        
+    # 프론트엔드에서 입력받은 키워드 (사용자가 입력하지 않으면 빈 리스트)
+    # user_selected_keywords = input("사용자가 선택한 키워드(쉼표로 구분, 최대 3개 이하)를 입력하세요: ").split(",")
+    # user_selected_keywords = [kw.strip() for kw in user_selected_keywords if kw.strip()]
+
     # Json 데이터를 변수에 저장
     user_input = prompt_data.get("message", "") # 메세지를 입력받음
+    print("고객님의 이벤트 정보를 입력해 주세요: " + user_input)
     user_input = user_input.replace("\n", " ")  # \n을 공백으로 대체
     brand_input = ""  # 브랜드 입력 없음
+    print("브랜드명이 있으면 입력해 주세요 (없다면 공백) : " + brand_input)
     selected_style = prompt_data.get("style", "")
+    print("선택한 스타일 ID를 입력하세요 (예: style1, style2, ...): " + selected_style)
 
     # 프론트엔드에서 입력받은 키워드 (사용자가 입력하지 않으면 빈 리스트)
     user_selected_keywords = prompt_data.get("keywords", [])[:3] # 최대 3개 이하
+    print("사용자가 선택한 키워드(쉼표로 구분, 최대 3개 이하)를 입력하세요: " + user_selected_keywords)
     user_selected_keywords = [kw.strip() for kw in user_selected_keywords if kw.strip()]
 
     # 키워드 추출
