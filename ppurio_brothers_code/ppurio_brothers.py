@@ -327,7 +327,6 @@ def main():
 
     # 프론트엔드에서 입력받은 키워드 (사용자가 입력하지 않으면 빈 리스트)
     user_selected_keywords = prompt_data.get("keywords", [])[:3] # 최대 3개 이하
-    print("사용자가 선택한 키워드(쉼표로 구분, 최대 3개 이하)를 입력하세요: " + user_selected_keywords)
     user_selected_keywords = [kw.strip() for kw in user_selected_keywords if kw.strip()]
 
     # 키워드 추출
