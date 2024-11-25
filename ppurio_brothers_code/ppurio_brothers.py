@@ -309,6 +309,7 @@ def main():
     
     # Json 데이터를 변수에 저장
     user_input = prompt_data.get("message", "") # 메세지를 입력받음
+    user_input = user_input.replace("\n", " ")  # \n을 공백으로 대체
     brand_input = ""  # 브랜드 입력 없음
     selected_style = prompt_data.get("style", "")
 
