@@ -19,28 +19,27 @@ client = openai.OpenAI(api_key = openai_api_key)
 STYLE_MAP = {
     "style1": {
         "art_style": "a modern and professional style with clean, sleek design elements",
-        "font": "ppurio_brothers_backup/font/NotoSansKR-VariableFont_wght.ttf"
+        "font": "/home/ec2-user/font/NotoSansKR-VariableFont_wght.ttf"
     },
     "style2": {
         "art_style": "a classic and elegant style featuring serif fonts and soft colors",
-        "font": "ppurio_brothers_backup/font/NanumMyeongjo-Regular.ttf"
+        "font": "/home/ec2-user/font/NanumMyeongjo-Regular.ttf"
     },
     "style3": {
         "art_style": "an eco-friendly style with earthy tones and natural elements",
-        "font": "ppurio_brothers_backup/font/Spoqa Han Sans Regular.ttf"        
+        "font": "/home/ec2-user/font/Spoqa Han Sans Regular.ttf"        
     },
     "style4": {
-    
         "art_style": "a warm and friendly local event style with cozy, inviting visuals",
-        "font": "ppurio_brothers_backup/font/BMHANNA_11yrs_ttf.ttf"
+        "font": "/home/ec2-user/font/BMHANNA_11yrs_ttf.ttf"
     },
     "style5": {
         "art_style": "a practical, information-focused style with clear, concise visuals",
-        "font": "ppurio_brothers_backup/font/NanumGothic-Regular.ttf"
+        "font": "/home/ec2-user/font/NanumGothic-Regular.ttf"
     },
     "style6": {
         "art_style": "a viral social media style with bold, eye-catching visuals",
-        "font": "ppurio_brothers_backup/font/BMDOHYEON_ttf.ttf"
+        "font": "/home/ec2-user/font/BMDOHYEON_ttf.ttf"
     }
 }
 
@@ -278,15 +277,43 @@ def insert_text(draw, text, box, color, font_path, font_size):
     # 텍스트 삽입
     draw.text(text_position, text, fill=color, font=font)
 
+def file_input(prompt_path):
+    with open(prompt_path, "r", encoding="utf-8") as file:
+        return file.read().replace('\n', ' ').strip() # 줄바꿈 및 앞 뒤 공백 제거
+    
+
+# 이미지 규격 줄이는 함수
+def resize_existing_image(input_path, output_path):
+    """
+    기존 이미지를 불러와 MMS 규격(640x480)으로 줄입니다.
+    PNG 형식으로 저장됩니다.
+    :param input_path: 기존 이미지 경로 (final_path)
+    :param output_path: 크기 조정된 이미지 저장 경로
+    """
+    mms_size = (640, 480)  # MMS 표준 크기
+    with Image.open(input_path) as img:
+        # 비율 유지하며 크기 조정
+        img.thumbnail(mms_size, Image.Resampling.LANCZOS)
+        img.save(output_path, format="PNG")  # PNG 형식으로 저장
+        print(f"이미지가 MMS 규격으로 {output_path}에 저장되었습니다.")
+
 # 실행 코드
 def main():
-    # 사용자 입력 받기
-    user_input = input("고객님의 이벤트 정보를 입력해 주세요: ")
-    brand_input = input("브랜드명이 있으면 입력해 주세요 (없으면 엔터): ")
-    selected_style = input("선택한 스타일 ID를 입력하세요 (예: style1, style2, ...): ")
+    # 경로 설정
+    OUTPUT_DIR = "/home/ec2-user/images"
+    os.makedirs(OUTPUT_DIR, exist_ok=True)
+
+    # 사용자 입력 Json으로 받기
+    with open("/home/ec2-user/prompt/prompt.json", "r", encoding="utf-8") as file :
+        prompt_data = json.load(file)
+    
+    # Json 데이터를 변수에 저장
+    user_input = prompt_data.get("message", "") # 메세지를 입력받음
+    brand_input = ""  # 브랜드 입력 없음
+    selected_style = prompt_data.get("style", "")
 
     # 프론트엔드에서 입력받은 키워드 (사용자가 입력하지 않으면 빈 리스트)
-    user_selected_keywords = input("사용자가 선택한 키워드(쉼표로 구분, 최대 3개 이하)를 입력하세요: ").split(",")
+    user_selected_keywords = prompt_data.get("keywords", [])[:3] # 최대 3개 이하
     user_selected_keywords = [kw.strip() for kw in user_selected_keywords if kw.strip()]
 
     # 키워드 추출
@@ -314,9 +341,6 @@ def main():
     recommended_font = recommend_font_by_style(selected_style)
     print("추천된 폰트:", recommended_font)
 
-    OUTPUT_DIR = "ppurio_brothers_backup/images"
-    os.makedirs(OUTPUT_DIR, exist_ok=True)
-
     # 이미지 생성, 텍스트 제거, 키워드 삽입까지 반복
     for i in range(1, 4): 
         # 파일 경로 설정
@@ -325,6 +349,7 @@ def main():
         output_path = os.path.join(OUTPUT_DIR, f"output/output_{i}.png")
         json_path = os.path.join(OUTPUT_DIR, f"origin_image/data_{i}.json")
         final_path = os.path.join(OUTPUT_DIR, f"final_output/final_poster_{i}.png")
+        final_mms_path = os.path.join(OUTPUT_DIR, f"final_mms_output/final_mms_{i}.png")
 
         print(f"\n[PROCESSING IMAGE {i}]")
         # DALL·E로 포스터 생성
@@ -380,6 +405,11 @@ def main():
         os.makedirs(os.path.dirname(final_path), exist_ok=True)
         image.save(final_path)
         print(f"Image {i} with keywords saved at {final_path}")
+
+        # MMS 규격 맞춤
+        resize_existing_image(final_path, final_mms_path)
+        print(f"Image {i} MMS료 규격 수정 : {final_mms_path}")
+        
 
     print("\n[ALL IMAGES PROCESSED AND KEYWORDS INSERTED]")
 
