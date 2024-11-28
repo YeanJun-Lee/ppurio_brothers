@@ -9,7 +9,7 @@ from PIL import Image, ImageDraw, ImageFont
 
 
 # 환경 변수에서 API KEY 가져오기
-openai_api_key = os.getenv('OPENAI_API_KEY')
+openai_api_key = os.getenv('MyAPIKey')
 stability_api_key = os.getenv('STABLE_API_KEY')
 
 # Open API Key 등록
@@ -116,7 +116,7 @@ def get_art_style(style_id):
 
 # 스타일에 따른 폰트 추천 (하나만 반환)
 def recommend_font_by_style(style_id):
-    return STYLE_MAP.get(style_id, {}).get("font", "Noto Sans KR")
+    return STYLE_MAP.get(style_id, {}).get("font", "/home/ec2-user/font/NotoSansKR-Black.ttf")
 
 # DALL·E로 포스터 생성
 def generate_poster_with_dalle(prompt, art_style):
@@ -280,22 +280,6 @@ def insert_text(draw, text, box, color, font_path, font_size):
 def file_input(prompt_path):
     with open(prompt_path, "r", encoding="utf-8") as file:
         return file.read().replace('\n', ' ').strip() # 줄바꿈 및 앞 뒤 공백 제거
-    
-
-# 이미지 규격 줄이는 함수
-def resize_existing_image(input_path, output_path):
-    """
-    기존 이미지를 불러와 MMS 규격(640x480)으로 줄입니다.
-    PNG 형식으로 저장됩니다.
-    :param input_path: 기존 이미지 경로 (final_path)
-    :param output_path: 크기 조정된 이미지 저장 경로
-    """
-    mms_size = (640, 480)  # MMS 표준 크기
-    with Image.open(input_path) as img:
-        # 비율 유지하며 크기 조정
-        img.thumbnail(mms_size, Image.Resampling.LANCZOS)
-        img.save(output_path, format="PNG")  # PNG 형식으로 저장
-        print(f"이미지가 MMS 규격으로 {output_path}에 저장되었습니다.")
 
 # 실행 코드
 def main():
@@ -311,7 +295,7 @@ def main():
     # user_input = input("고객님의 이벤트 정보를 입력해 주세요: ")
     # brand_input = input("브랜드명이 있으면 입력해 주세요 (없으면 엔터): ")
     # selected_style = input("선택한 스타일 ID를 입력하세요 (예: style1, style2, ...): ")
-        
+    
     # 프론트엔드에서 입력받은 키워드 (사용자가 입력하지 않으면 빈 리스트)
     # user_selected_keywords = input("사용자가 선택한 키워드(쉼표로 구분, 최대 3개 이하)를 입력하세요: ").split(",")
     # user_selected_keywords = [kw.strip() for kw in user_selected_keywords if kw.strip()]
@@ -418,11 +402,6 @@ def main():
         os.makedirs(os.path.dirname(final_path), exist_ok=True)
         image.save(final_path)
         print(f"Image {i} with keywords saved at {final_path}")
-
-        # MMS 규격 맞춤
-        resize_existing_image(final_path, final_mms_path)
-        print(f"Image {i} MMS료 규격 수정 : {final_mms_path}")
-        
 
     print("\n[ALL IMAGES PROCESSED AND KEYWORDS INSERTED]")
 
