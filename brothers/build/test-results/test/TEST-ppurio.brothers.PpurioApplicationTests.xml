@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="ppurio.brothers.PpurioApplicationTests" tests="1" skipped="0" failures="0" errors="0" timestamp="2024-11-29T00:44:32" hostname="DESKTOP-GD3SP7B" time="0.99">
+  <properties/>
+  <testcase name="contextLoads()" classname="ppurio.brothers.PpurioApplicationTests" time="0.99"/>
+  <system-out><![CDATA[09:44:29.489 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [ppurio.brothers.PpurioApplicationTests]: PpurioApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+09:44:29.726 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration ppurio.brothers.PpurioApplication for test class ppurio.brothers.PpurioApplicationTests
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v3.3.4)
+
+2024-11-29T09:44:30.327+09:00  INFO 2428 --- [ppurio] [    Test worker] ppurio.brothers.PpurioApplicationTests   : Starting PpurioApplicationTests using Java 17.0.11 with PID 2428 (started by User in C:\free\brothers)
+2024-11-29T09:44:30.327+09:00  INFO 2428 --- [ppurio] [    Test worker] ppurio.brothers.PpurioApplicationTests   : No active profile set, falling back to 1 default profile: "default"
+2024-11-29T09:44:31.591+09:00  INFO 2428 --- [ppurio] [    Test worker] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2024-11-29T09:44:31.734+09:00  INFO 2428 --- [ppurio] [    Test worker] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page: class path resource [static/index.html]
+2024-11-29T09:44:32.402+09:00  INFO 2428 --- [ppurio] [    Test worker] ppurio.brothers.PpurioApplicationTests   : Started PpurioApplicationTests in 2.466 seconds (process running for 4.127)
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
